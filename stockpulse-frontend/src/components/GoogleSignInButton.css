@@ -1,0 +1,24 @@
+/* src/components/GoogleSignInButton.css */
+
+.google-signin-btn {
+    display: flex;
+    align-items: center; /* Vertically center the icon and text */
+    justify-content: center; /* Center content horizontally */
+    gap: 10px; /* Space between icon and text */
+    padding: 10px 20px; /* Adjust padding for a better look */
+    background-color: #fff; /* Light background */
+    border: none; /* Light border */
+    color: #333; /* Dark text color */
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+  }
+  
+  .google-signin-btn:hover {
+    background-color: #f5f5f5; /* Slightly darker background on hover */
+    border-color: #ccc; /* Slightly darker border on hover */
+  }
+  
+  .google-icon {
+    font-size: 20px; /* Size of the Google icon */
+   
+  }
+  

@@ -1,0 +1,127 @@
+.analytics-page {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f9f9f9;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .content {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .analytics-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    background-color: #e8f1ff;
+    padding: 20px;
+    height: 100vh;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.logo {
+    font-size: 1.5em;
+    color: #4a90e2;
+    margin-bottom: 20px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-list li {
+    margin: 10px 0;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-list li a:hover {
+    color: #4a90e2;
+}
+
+.nav-list li.active a {
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+.main-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    width: 200px;
+}
+
+.notification-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+.company-name {
+    font-weight: bold;
+}
+
+.analytics-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.total-orders-card, .item-card, .inventory-status-card {
+    margin-bottom: 20px;
+}
+
+.inventory-status {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.inventory-details {
+    margin-left: 20px;
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inventory-table th, .inventory-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.inventory-table th {
+    background-color: #f2f2f2;
+}

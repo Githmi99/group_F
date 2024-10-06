@@ -1,0 +1,142 @@
+.bom-ordering-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+  padding: 5px;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+}
+
+.bom-ordering-container .bom-ordering-content {
+  background-color: #fff;
+  padding: 1px;
+  border-radius: 1px;
+  box-shadow: white;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bom-ordering-container .bom-ordering-content .form-group {
+  margin-bottom: 1px;
+}
+
+.bom-ordering-container .bom-ordering-content .form-control {
+  margin-bottom: 10px;
+}
+
+.bom-ordering-container .bom-ordering-content .table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.bom-ordering-container .bom-ordering-content .table th, 
+.bom-ordering-container .bom-ordering-content .table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.bom-ordering-container .bom-ordering-content .table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.bom-ordering-container .bom-ordering-content .actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bom-ordering-container .bom-ordering-content .edit-btn, 
+.bom-ordering-container .bom-ordering-content .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.bom-ordering-container .bom-ordering-content .delete-btn {
+  color: #dc3545;
+}
+
+.bom-ordering-container .bom-ordering-content .add-more {
+  background-color: white;
+  color: #333;
+  margin-top: 10px;
+}
+
+.bom-ordering-container .bom-ordering-content .button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.bom-ordering-container .bom-ordering-content .add-bom-btn, 
+.bom-ordering-container .bom-ordering-content .cancel-btn {
+  padding: 10px 20px;
+  font-size: 14px; /* Adjusted font size */
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bom-ordering-container .bom-ordering-content .add-bom-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.bom-ordering-container .bom-ordering-content .cancel-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.bom-ordering-container .bom-ordering-content .place-order-btn, 
+.bom-ordering-container .bom-ordering-content .cancel-order-btn {
+  padding: 10px 20px;
+  font-size: 14px; /* Adjusted font size */
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bom-ordering-container .bom-ordering-content .place-order-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.bom-ordering-container .bom-ordering-content .cancel-order-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .bom-ordering-container {
+      padding: 10px;
+  }
+
+  .bom-ordering-container .bom-ordering-content {
+      padding: 10px;
+  }
+
+  .bom-ordering-container .bom-ordering-content .table th, 
+  .bom-ordering-container .bom-ordering-content .table td {
+      font-size: 12px;
+  }
+
+  .bom-ordering-container .bom-ordering-content .add-more, 
+  .bom-ordering-container .bom-ordering-content .add-bom-btn, 
+  .bom-ordering-container .bom-ordering-content .place-order-btn, 
+  .bom-ordering-container .bom-ordering-content .cancel-btn, 
+  .bom-ordering-container .bom-ordering-content .cancel-order-btn {
+      padding: 8px 16px;
+      font-size: 14px;
+  }
+}

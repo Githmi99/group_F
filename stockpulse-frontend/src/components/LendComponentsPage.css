@@ -1,0 +1,188 @@
+/* src/components/LendComponentsPage.css */
+
+.lend-components-page {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f9f9f9;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.lend-components-page .content {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+}
+
+.lend-components-page .page-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+.lend-components-page .search-sort-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.lend-components-page .search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.lend-components-page .search-icon {
+  margin-left: -30px;
+  color: #999;
+  pointer-events: none;
+}
+
+.lend-components-page .sort-button {
+  padding: 10px 20px;
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.lend-components-page .components-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  overflow-x: auto; /* Adds horizontal scroll if needed */
+}
+
+.lend-components-page .components-table th,
+.lend-components-page .components-table td {
+  padding: 12px; /* Increased padding for better spacing */
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.lend-components-page .components-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.lend-components-page .components-table tr.highlight {
+  background-color: #e6f7ff; /* Highlighted row */
+}
+
+.lend-components-page .components-table .actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 0; /* Remove extra padding */
+  margin: 0;  /* Remove extra margin */
+}
+
+.lend-components-page .components-table .actions .action-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px; /* Consistent padding for the action buttons */
+}
+
+.lend-components-page .components-table .actions .edit-btn {
+  color: #007bff;
+}
+
+.lend-components-page .components-table .actions .delete-btn {
+  color: #dc3545;
+}
+
+.lend-components-page .status-icon {
+  margin-right: 5px;
+}
+
+.lend-components-page .status-icon.completed {
+  color: green;
+}
+
+.lend-components-page .status-icon.pending {
+  color: orange;
+}
+
+.lend-components-page .status-icon.error {
+  color: red;
+}
+
+.lend-components-page .action-buttons {
+  display: flex;
+  justify-content: flex-end; /* Aligns items to the right */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.lend-components-page .add-btn, 
+.lend-components-page .cancel-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.lend-components-page .add-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.lend-components-page .cancel-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .lend-components-page {
+    padding: 10px;
+  }
+
+  .lend-components-page .content {
+    padding: 10px;
+  }
+
+  .lend-components-page .page-title {
+    font-size: 20px;
+  }
+
+  .lend-components-page .search-sort-bar {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .lend-components-page .search-input, 
+  .lend-components-page .sort-button {
+    width: 100%;
+  }
+
+  .lend-components-page .components-table th, 
+  .lend-components-page .components-table td {
+    font-size: 12px;
+  }
+
+  .lend-components-page .add-btn, 
+  .lend-components-page .cancel-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}

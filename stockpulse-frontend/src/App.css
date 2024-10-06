@@ -1,0 +1,36 @@
+/* src/App.css */
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Prevent scrolling on the main app container */
+  width: 100%;
+}
+
+.navigation-panel {
+  flex: 0 0 250px; /* Fixed width for the NavigationPanel */
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 250px; /* Align with the width of the NavigationPanel */
+  margin-top: 60px; /* Align with the height of the Header */
+  padding: 20px;
+  background-color: #f5f5f5;
+  overflow-y: auto; /* Allow scrolling if content is too large */
+  min-height: calc(100vh - 60px); /* Ensure it fills the remaining height */
+  margin-right: 5px;
+}

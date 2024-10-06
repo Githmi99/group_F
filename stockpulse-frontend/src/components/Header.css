@@ -1,0 +1,65 @@
+/* src/components/Header.css */
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px; /* Existing padding */
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  left: 250px; /* Aligns after the NavigationPanel */
+  width: calc(100% - 250px); /* Full width minus the NavigationPanel width */
+  z-index: 999; /* Ensure it's on top of the main content */
+  padding-left: 40px; /* Add padding to move content to the right */
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #563d7c;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.highlight {
+  color: #aa00ff; /* Your highlight color */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-button {
+  background: rgb(218, 199, 199);
+  border: rgb(203, 127, 72);
+  cursor: pointer;
+  height: fit-content;
+}
+
+.notifications {
+  position: relative;
+}
+
+.notification-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #563d7c;
+}
+
+.company-name {
+  font-size: 1rem;
+  color: #000;
+  font-weight: bold;
+}

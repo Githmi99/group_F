@@ -1,0 +1,42 @@
+/* src/components/Button.css */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  .button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .button:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  
+  .button-icon {
+    margin: 0 5px;
+  }
+  
+  .button-icon.left {
+    margin-right: 10px;
+  }
+  
+  .button-icon.right {
+    margin-left: 10px;
+  }
+  

@@ -1,0 +1,140 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.low-stocks {
+    padding: 20px;
+    flex: 1;
+    background-color: #f5f5f5;
+  }
+  
+  .low-stocks h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .search-filter {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: none;
+    color: rgb(29, 28, 28);
+    border-color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    height: min-content;
+  }
+  
+  .search-button:hover {
+    background-color: #555;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #e0e0e0;
+  }
+  
+  table td.process {
+    color: orange;
+  }
+  
+  table td.delivered {
+    color: green;
+  }
+  
+  table td.cancelled {
+    color: red;
+  }
+  
+  .edit-button, .delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .edit-button:hover, .delete-button:hover {
+    color: #555;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .purchase-button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .purchase-button:hover {
+    background-color: #555;
+  }
+  
+  .cancel-button {
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel-button:hover {
+    background-color: darkred;
+  }
+  
+  /* LowStocks.css */
+
+.low-stocks {
+  padding: 20px;
+  background-color: #f5f5f5;
+  overflow: auto; /* Allow scrolling if content is too large */
+}
+
+.low-stocks table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.low-stocks table th,
+.low-stocks table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.low-stocks table th {
+  background-color: #e0e0e0;
+}

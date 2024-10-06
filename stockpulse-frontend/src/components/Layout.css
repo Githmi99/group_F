@@ -1,0 +1,38 @@
+/* src/components/Layout.css */
+.content {
+    padding: 10px;
+    margin-top: 75px; /* Adjust based on your navigation height */
+  }
+  
+  /* Layout.css 
+.layout {
+  display: flex;
+}
+*/
+.navigation-panel {
+  width: 250px; /* Adjust width as needed */
+  height: 100vh; /* Full height of the viewport */
+  position: fixed; /* Stay in place when scrolling */
+}
+
+.content {
+  margin-left: 300px; /* Same as the width of the navigation panel */
+  padding: 20px; /* Adjust padding as needed */
+  height:overflow; /* Full height of the viewport */
+  width: 1220px;
+  overflow: auto; /* Allows scrolling if content overflows */}
+
+
+
+/* Layout.css */
+.layout {
+  display: flex;
+  height: 100vh; /* Full height of the viewport */
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto; /* Allow scrolling for content */
+  padding: 20px;
+  background-color: #f4f4f4;
+}

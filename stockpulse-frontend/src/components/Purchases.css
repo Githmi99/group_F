@@ -1,0 +1,77 @@
+/* Make the body and html take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container adjustments */
+.purchases-container {
+  padding: 20px;
+  height: calc(100vh - 40px); /* Adjust the container height, accounting for padding */
+  overflow: auto; /* Handle overflow content */
+  background-color: #f0f0f0; /* Optional: Adjust background color to better see the area */
+ 
+}
+
+/* Other styles remain the same */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header input, .header select {
+  padding: 10px;
+  margin: 0 10px;
+}
+
+.purchases-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.purchases-table th, .purchases-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.status.unpaid {
+  background-color: rgb(166, 4, 4);
+  color: white;
+}
+
+.status.paid {
+  background-color: rgb(234, 249, 25);
+  color: white;
+ 
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-btn {
+  background-color: rgb(11, 155, 73);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
