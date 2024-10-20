@@ -92,19 +92,33 @@ exports.searchInStcok = async (req, res) => {
           partNo: item.partNumber,
         });
         if (!component) {
-          return { partNumber: item.partNumber, status: 'Not Found' };
+          return {
+            partNumber: item.partNumber,
+            quantity: item.quantity,
+            cost: item.cost,
+            footprint: item.footprint,
+            description: item.description,
+            status: 'Not Found',
+          };
         }
         const isSufficient = component.qty >= item.quantity;
         return {
           partNumber: item.partNumber,
-          required: item.quantity,
+          quantity: item.quantity,
           available: component.qty,
+          cost: item.cost,
+          footprint: item.footprint,
+          description: item.description,
           status: isSufficient ? 'In Stock' : 'Insufficient Stock',
         };
       })
     );
 
-    res.status(200).json({ bomId, stockStatus });
+    // Separate the in-stock and not-in-stock items
+    const inStock = stockStatus.filter((item) => item.status === 'In Stock');
+    const notInStock = stockStatus.filter((item) => item.status !== 'In Stock');
+
+    res.status(200).json({ bomId, inStock, notInStock });
   } catch (error) {
     console.error('Error searching in stock:', error);
     res.status(500).json({ message: error.message });
