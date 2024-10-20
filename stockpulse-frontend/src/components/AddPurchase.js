@@ -44,7 +44,7 @@ const AddPurchase = ({ onClose }) => {
     `);
 
     // Constraints based on role
-    if (role === 'admin') {
+    if (role === 'intern') {
       await requestApprovalFromAdmin(message);
       alert(
         'Interns are not allowed to make purchases.Requested the purchase from admin.'
