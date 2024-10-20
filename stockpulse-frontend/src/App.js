@@ -17,6 +17,7 @@ import BoMOrdering from './components/BoMOrdering';
 import Settings from './components/Settings';
 import HelpCenter from './components/HelpCenter';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ComponentRequestPage from './components/ComponentRequestPage';
 
 const App = () => {
 
@@ -117,6 +118,14 @@ const App = () => {
             element={
               <Layout>
                 <HelpCenter />
+              </Layout>
+            }
+          />
+          <Route
+            path="/componentRequest"
+            element={
+              <Layout>
+                <ComponentRequestPage />
               </Layout>
             }
           />

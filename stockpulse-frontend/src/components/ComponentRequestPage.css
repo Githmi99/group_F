@@ -1,0 +1,39 @@
+.dashboard-container {
+    padding: 20px;
+}
+
+.request-list-container {
+    margin-top: 20px;
+}
+
+.request-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.request-table th, .request-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.status-btn {
+    margin: 0 5px;
+    padding: 5px 10px;
+  }
+  
+  .issued-btn {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .not-issued-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .status-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
