@@ -157,13 +157,13 @@ export const appApi = createApi({
     }),
 
     // Request-related endpoints
-    getRequests: builder.query({
-      query: () => '/requests',
+    getComponentRequests: builder.query({
+      query: () => '/component-request',
     }),
 
     addRequest: builder.mutation({
       query: (request) => ({
-        url: '/requests',
+        url: '/component-request',
         method: 'POST',
         body: request,
       }),
@@ -171,8 +171,8 @@ export const appApi = createApi({
 
     updateRequest: builder.mutation({
       query: ({ id, request }) => ({
-        url: `/requests/${id}`,
-        method: 'PUT',
+        url: `/component-request/:id/status`,
+        method: 'PATCH',
         body: request,
       }),
     }),
@@ -183,6 +183,8 @@ export const appApi = createApi({
         method: 'DELETE',
       }),
     }),
+
+
 
     // Additional endpoints can go here as your project evolves
   }),
@@ -211,7 +213,7 @@ export const {
   useGetBOMByIdQuery,
   useUpdateBOMMutation,
   useDeleteBOMMutation,
-  useGetRequestsQuery,
+  useGetComponentRequestsQuery,
   useAddRequestMutation,
   useUpdateRequestMutation,
   useDeleteRequestMutation,

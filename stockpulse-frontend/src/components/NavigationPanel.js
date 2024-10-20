@@ -34,7 +34,7 @@ const NavigationPanel = () => {
       'analytics',
       'settings',
     ],
-    'stock manager': ['components', 'lowstocks', 'purchases', 'lending'],
+    'stock manager': ['components', 'lowstocks', 'purchases', 'lending','componentRequest' ],
     user: ['components', 'purchases', 'bom-ordering'],
     intern: ['components', 'purchases'],
     executive: [
@@ -71,6 +71,15 @@ const NavigationPanel = () => {
               <NavLink to='/components' activeClassName='active'>
                 <FaCog className='nav-icon' />
                 <span>Components</span>
+              </NavLink>
+            </li>
+          )}
+
+          {allowedRoutes.includes('componentRequest') && (
+            <li>
+              <NavLink to='/componentRequest' activeClassName='active'>
+                <FaChartLine className='nav-icon' />
+                <span>Component Requests</span>
               </NavLink>
             </li>
           )}
