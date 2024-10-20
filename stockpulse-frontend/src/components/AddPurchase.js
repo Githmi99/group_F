@@ -3,6 +3,7 @@ import './AddPurchase.css';
 import Header from './Header';
 import { useAddPurchaseMutation } from '../services/api';
 import Cookies from 'js-cookie';
+import requestApprovalFromAdmin from '../services/emailService';
 
 const AddPurchase = ({ onClose }) => {
   const [product, setProduct] = useState('');
@@ -11,6 +12,7 @@ const AddPurchase = ({ onClose }) => {
   const [cost, setCost] = useState('');
   const [date, setDate] = useState('');
   const [addPurchase] = useAddPurchaseMutation();
+  const [message, setMessage] = useState('');
 
   const handleAddPurchase = async (e) => {
     e.preventDefault();
@@ -31,28 +33,46 @@ const AddPurchase = ({ onClose }) => {
       alert('Not allowed to make the purchase');
     }
 
+    setMessage(`
+      User with role "${role}" is requesting approval for a purchase:
+
+      - Product: ${product}
+      - Quantity: ${quantity}
+      - Cost: Rs ${cost}
+      - Payment Link/Shop: ${paymentLinkOrShop}
+      - Date Required: ${date}
+    `);
+
     // Constraints based on role
     if (role === 'intern') {
-      alert('Interns are not allowed to make purchases.');
+      await requestApprovalFromAdmin(message);
+      alert(
+        'Interns are not allowed to make purchases.Requested the purchase from admin.'
+      );
       return;
     }
 
     if (role === 'executive' && parseFloat(cost) > 10000) {
+      await requestApprovalFromAdmin(message);
       alert(
-        'Executives cannot make purchases over 10,000. Please request an admin.'
+        'Executives cannot make purchases over 10,000. Please request an admin.Requested the purchase from admin.'
       );
       return;
     }
 
     if (role === 'stock manager' && parseFloat(cost) > 5000) {
+      await requestApprovalFromAdmin(message);
       alert(
-        'Executives cannot make purchases over 5000. Please request an admin.'
+        'Executives cannot make purchases over 5000. Please request an admin.Requested the purchase from admin.'
       );
       return;
     }
 
     if (role === 'user' && parseFloat(cost) > 5000) {
-      alert('Users cannot make purchases over 5000. Please request an admin.');
+      await requestApprovalFromAdmin(message);
+      alert(
+        'Users cannot make purchases over 5000. Please request an admin.Requested the purchase from admin.'
+      );
       return;
     }
 
