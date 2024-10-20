@@ -4,14 +4,16 @@ const Component = require('../models/component');
 // Create a new BoM
 exports.createBoM = async (req, res) => {
   try {
-    const { name, description, items } = req.body;
+    const { name, description, bomItems } = req.body;
 
     // Ensure items are processed as an array of BoMItem objects
     const newBoM = new BoM({
       name,
       description,
-      items, // Mongoose will automatically validate and embed the BoMItem schema
+      items: bomItems, // Mongoose will automatically validate and embed the BoMItem schema
     });
+
+    console.log(`createBoM ${newBoM}`);
 
     await newBoM.save();
     res.status(201).json(newBoM);
@@ -78,8 +80,7 @@ exports.searchInStcok = async (req, res) => {
     const bomId = req.params.id;
 
     // Find the BoM by its ID
-    const bom = await BoM.findById(bomId).populate('items');
-    console.log(bom);
+    const bom = await BoM.findById(bomId);
     if (!bom) {
       return res.status(404).json({ message: 'BoM not found' });
     }
@@ -88,7 +89,7 @@ exports.searchInStcok = async (req, res) => {
     const stockStatus = await Promise.all(
       bom.items.map(async (item) => {
         const component = await Component.findOne({
-          partNumber: item.partNumber,
+          partNo: item.partNumber,
         });
         if (!component) {
           return { partNumber: item.partNumber, status: 'Not Found' };
