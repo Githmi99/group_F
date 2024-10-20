@@ -79,6 +79,7 @@ exports.searchInStcok = async (req, res) => {
 
     // Find the BoM by its ID
     const bom = await BoM.findById(bomId).populate('items');
+    console.log(bom);
     if (!bom) {
       return res.status(404).json({ message: 'BoM not found' });
     }
