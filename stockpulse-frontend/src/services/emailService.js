@@ -10,12 +10,12 @@ const requestApprovalFromAdmin = async (message) => {
     }
 
     // Method to send an email
-    async sendEmail(serviceID, templateID, to, subject, text, html) {
+    async sendEmail(serviceID, templateID, to, subject, text) {
       const templateParams = {
-        to_email: to,
+        to_name: to,
         subject: subject,
-        text: text,
-        html: html,
+        message: text,
+        from_name: 'StockPulse',
       };
 
       try {
@@ -39,14 +39,14 @@ const requestApprovalFromAdmin = async (message) => {
   const subject = 'Purchase Request Approval Needed';
 
   try {
-    const adminEmail = 'danuka@gmail.com'; // Replace with the actual admin email
+    const adminEmail = 'StockPulse Stock Manager'; // Replace with the actual admin email
+    console.log(message);
     await emailService.sendEmail(
       'service_sebvfxq', // Replace with your EmailJS service ID
       'template_9v76b5z', // Replace with your EmailJS template ID
       adminEmail,
       subject,
-      message,
-      `<h1>${message}</h1>` // Sending HTML format
+      message
     );
     console.log('Purchase request sent to admin');
   } catch (error) {
