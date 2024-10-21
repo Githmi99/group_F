@@ -1,3 +1,4 @@
+// src/components/HelpCenter.js
 import React, { useState, useEffect } from 'react';
 import './HelpCenter.css';
 import Header from './Header';
@@ -73,7 +74,7 @@ const HelpCenter = () => {
       <Header title="Center" titlePrefix="Help" />
       <form onSubmit={handleSubmitQuestion}>
         <div>
-          <label>Question:</label>
+          <h3><label>Question:</label></h3>
           <textarea
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
@@ -120,6 +121,23 @@ const HelpCenter = () => {
             </form>
           </div>
         ))}
+
+        {/* Predefined Questions and Answers */}
+        <div className="predefined-qa">
+          <h3>Frequently Asked Questions</h3>
+          <div className="question-box">
+            <h4>1. How can I reset my password?</h4>
+            <p>To reset your password, click on 'Forgot Password' on the login page and follow the instructions.</p>
+          </div>
+          <div className="question-box">
+            <h4>2. Where can I find my order history?</h4>
+            <p>You can view your order history in the 'My Orders' section of your account dashboard.</p>
+          </div>
+          <div className="question-box">
+            <h4>3. How do I contact customer support?</h4>
+            <p>You can reach customer support by emailing support@example.com or calling our helpline at 123-456-7890.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
