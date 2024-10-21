@@ -25,7 +25,7 @@ app.use('/api/low-stocks', lowStockRoutes);
 app.use('/api/lendings', lendingRoutes); // Use lending routes
 app.use('/api', bomRoutes);
 app.use('/api', addRequestRoute);
-app.use('/api', ComponentRequestRoutes); // Use a more descriptive route path
+app.use('/api', addComponentRequestRoutes); // Use a more descriptive route path
 app.use('/api', statsRoutes);
 app.use('/api', helpCenterRoutes);
 

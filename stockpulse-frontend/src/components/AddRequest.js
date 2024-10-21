@@ -21,11 +21,49 @@ const AddRequest = ({ visible, onClose }) => {
     });
   };
 
+  const getCookie = (cookieName) => {
+    const name = cookieName + "=";
+    const decodedCookie = decodeURIComponent(document.cookie); // Decode the cookie
+    const cookies = decodedCookie.split(';'); // Split cookies into an array
+
+    // Loop through cookies to find the one with the matching name
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length); // Return the cookie value (JWT token)
+        }
+    }
+
+    return ""; // Return an empty string if the cookie is not found
+};
+
+const decodeToken = (token) => {
+    const base64Url = token.split('.')[1]; // Get the payload (2nd part)
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Adjust base64 format
+
+    // Decode the base64 payload to a JSON string
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload); // Convert JSON string to object
+};
+
+const getDecodedTokenFromCookie = (cookieName) => {
+    const token = getCookie(cookieName); // Get JWT from cookie
+    if (token) {
+        return decodeToken(token).user.id; // Decode JWT if found
+    } else {
+        console.log('Token not found in cookie');
+        return null;
+    }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
   
-    const userId = localStorage.getItem('userId');  // Example to get userId
+    const userId =  getDecodedTokenFromCookie('token'); // Example to get userId
   
     try {
       await addRequest({

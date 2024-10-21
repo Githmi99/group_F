@@ -32,7 +32,7 @@ exports.getLatestComponents = async (req, res) => {
     // Retrieve the latest 10 added components, sorted by their creation date in descending order
     const latestComponents = await Component.find()
       .sort({ _id: -1 }) // Sorting by _id in descending order returns the most recent entries
-      .limit(5);
+      .limit(8);
 
     res.status(200).json(latestComponents);
   } catch (error) {

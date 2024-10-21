@@ -2,12 +2,50 @@ import React, { useState } from 'react';
 import { useGetComponentRequestsQuery, useUpdateRequestMutation } from '../services/api'; // Assuming you have these in your api.js
 import './ComponentRequestPage.css'; // Ensure you have appropriate styling
 
+
 const ComponentRequestPage = () => {
   const { data: requests, refetch, isLoading, error } = useGetComponentRequestsQuery();
   const [updateRequestStatus] = useUpdateRequestMutation();
   const [statusUpdateError, setStatusUpdateError] = useState(null);
   const [showCompletedRequests, setShowCompletedRequests] = useState(false); // Toggle for showing/hiding completed requests
 
+  const getCookie = (cookieName) => {
+    const name = cookieName + "=";
+    const decodedCookie = decodeURIComponent(document.cookie); // Decode the cookie
+    const cookies = decodedCookie.split(';'); // Split cookies into an array
+
+    // Loop through cookies to find the one with the matching name
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length); // Return the cookie value (JWT token)
+        }
+    }
+
+    return ""; // Return an empty string if the cookie is not found
+};
+
+const decodeToken = (token) => {
+    const base64Url = token.split('.')[1]; // Get the payload (2nd part)
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Adjust base64 format
+
+    // Decode the base64 payload to a JSON string
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload); // Convert JSON string to object
+};
+
+const getDecodedTokenFromCookie = (cookieName) => {
+    const token = getCookie(cookieName); // Get JWT from cookie
+    if (token) {
+        return decodeToken(token).user.id; // Decode JWT if found
+    } else {
+        console.log('Token not found in cookie');
+        return null;
+    }
+};
   const handleStatusChange = async (id, newStatus) => {
     setStatusUpdateError(null); // Clear any previous error
 
@@ -40,7 +78,7 @@ const ComponentRequestPage = () => {
           <tr>
             <th>Part No</th>
             <th>Quantity</th>
-            <th>User Email</th>
+            <th>User ID</th>
             <th>Date</th>
             <th>Status</th>
             <th>Action</th>
@@ -52,7 +90,7 @@ const ComponentRequestPage = () => {
               <tr key={request._id}>
                 <td>{request.partNo}</td>
                 <td>{request.quantity}</td>
-                <td>{request.userId.email}</td> {/* Accessing email instead of the entire object */}
+                <td>{getDecodedTokenFromCookie('token')}</td> {/* Accessing email instead of the entire object */}
                 <td>{new Date(request.dateOfNeed).toLocaleDateString()}</td>
                 <td>{request.status || 'Not Issued'}</td>
                 <td>
