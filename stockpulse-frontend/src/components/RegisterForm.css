@@ -15,7 +15,6 @@
   overflow: hidden;
   width: 100%;
   margin: 10px;
-  
 }
 
 .image-container {
@@ -66,6 +65,20 @@
   color: #555;
 }
 
+/* Adjust the width of the select role dropdown */
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Decrease the width of select role dropdown */
+.form-group select {
+  width: 200px; /* Adjust the width as needed */
+}
+
 .sign-up-button {
   width: 100%;
   padding: 10px;
@@ -82,14 +95,18 @@
 
 .login-link {
   margin-top: 20px;
-  text-align: center;
+  text-align: center; /* Center the login link */
 }
 
-.login-link a {
+.login-link button {
+  background: none;
+  border: none;
   color: #333;
-  text-decoration: none;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-.login-link a:hover {
-  text-decoration: underline;
+/* Remove green hover color */
+.login-link button:hover {
+  color: #555; /* Optional: Set to gray instead of green or keep as default */
 }

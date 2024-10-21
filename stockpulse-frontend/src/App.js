@@ -12,12 +12,12 @@ import LowStocks from './components/LowStocks';
 import Purchases from './components/Purchases';
 import AddPurchase from './components/AddPurchase';
 import LendComponentsPage from './components/LendComponentsPage';
-import AnalyticsPage from './components/Analytics';
 import BoMOrdering from './components/BoMOrdering';
 import Settings from './components/Settings';
 import HelpCenter from './components/HelpCenter';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ComponentRequestPage from './components/ComponentRequestPage';
+import BoMOrdersPage from './components/BoMOrdersPage';
 
 const App = () => {
 
@@ -97,14 +97,6 @@ const App = () => {
               </Layout>
             }
           />
-           <Route
-            path="/analytics"
-            element={
-              <Layout>
-                <AnalyticsPage />
-              </Layout>
-            }
-          />
           <Route
             path="/settings"
             element={
@@ -126,6 +118,14 @@ const App = () => {
             element={
               <Layout>
                 <ComponentRequestPage />
+              </Layout>
+            }
+          />
+           <Route
+            path="/bomorderslist"
+            element={
+              <Layout>
+                <BoMOrdersPage />
               </Layout>
             }
           />

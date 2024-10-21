@@ -3,7 +3,7 @@
 .dashboard {
   margin-left: 50px; /* To account for the navigation panel */
   padding: 20px;
-  width: auto;
+  width:100%;
 }
 
 .dashboard-header {

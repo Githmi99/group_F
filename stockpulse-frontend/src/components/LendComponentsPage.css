@@ -1,5 +1,3 @@
-/* src/components/LendComponentsPage.css */
-
 .lend-components-page {
   display: flex;
   flex-direction: column;
@@ -17,58 +15,17 @@
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
-  align-items: center;
-}
-
-.lend-components-page .page-title {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-  align-items: center;
-}
-
-.lend-components-page .search-sort-bar {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 10px;
-}
-
-.lend-components-page .search-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.lend-components-page .search-icon {
-  margin-left: -30px;
-  color: #999;
-  pointer-events: none;
-}
-
-.lend-components-page .sort-button {
-  padding: 10px 20px;
-  background-color: #6c757d;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .lend-components-page .components-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  overflow-x: auto; /* Adds horizontal scroll if needed */
 }
 
 .lend-components-page .components-table th,
 .lend-components-page .components-table td {
-  padding: 12px; /* Increased padding for better spacing */
+  padding: 12px;
   border: 1px solid #ddd;
   text-align: left;
   font-size: 14px;
@@ -80,16 +37,10 @@
   font-weight: bold;
 }
 
-.lend-components-page .components-table tr.highlight {
-  background-color: #e6f7ff; /* Highlighted row */
-}
-
 .lend-components-page .components-table .actions {
   display: flex;
   justify-content: center;
   gap: 10px;
-  padding: 0; /* Remove extra padding */
-  margin: 0;  /* Remove extra margin */
 }
 
 .lend-components-page .components-table .actions .action-btn {
@@ -97,7 +48,6 @@
   border: none;
   font-size: 16px;
   cursor: pointer;
-  padding: 10px; /* Consistent padding for the action buttons */
 }
 
 .lend-components-page .components-table .actions .edit-btn {
@@ -126,12 +76,12 @@
 
 .lend-components-page .action-buttons {
   display: flex;
-  justify-content: flex-end; /* Aligns items to the right */
+  justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
 }
 
-.lend-components-page .add-btn, 
+.lend-components-page .add-btn,
 .lend-components-page .cancel-btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -139,11 +89,13 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  height: fit-content;
 }
 
 .lend-components-page .add-btn {
   background-color: #007bff;
   color: #fff;
+  margin-top: 10px;
 }
 
 .lend-components-page .cancel-btn {
@@ -151,7 +103,6 @@
   color: #fff;
 }
 
-/* Responsive design improvements */
 @media (max-width: 768px) {
   .lend-components-page {
     padding: 10px;
@@ -161,26 +112,12 @@
     padding: 10px;
   }
 
-  .lend-components-page .page-title {
-    font-size: 20px;
-  }
-
-  .lend-components-page .search-sort-bar {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .lend-components-page .search-input, 
-  .lend-components-page .sort-button {
-    width: 100%;
-  }
-
-  .lend-components-page .components-table th, 
+  .lend-components-page .components-table th,
   .lend-components-page .components-table td {
     font-size: 12px;
   }
 
-  .lend-components-page .add-btn, 
+  .lend-components-page .add-btn,
   .lend-components-page .cancel-btn {
     padding: 8px 16px;
     font-size: 14px;

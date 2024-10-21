@@ -184,8 +184,55 @@ export const appApi = createApi({
       }),
     }),
 
+    getStatics: builder.mutation({
+      query: (id) => ({
+        url: `/api/stats`,
+        method: 'GET',
+      }),
+    }),
 
+    getCurrentUser: builder.query({
+      query: () => '/auth/me', // Ensure this exists on the backend
+    }),
+    
+    searchComponents: builder.query({
+      query: ({ partNo }) => `/components/search?partNo=${partNo}`,
+    }),
 
+    // New endpoint for submitting questions
+    submitQuestion: builder.mutation({
+      query: (question) => ({
+        url: '/help/submit-question', 
+        method: 'POST',
+        body: { question }, // Wrap the question in an object
+      }),
+    }),
+
+        // Add the new endpoint for submitting answers
+    submitAnswer: builder.mutation({
+      query: ({ questionId, answer }) => ({
+        url: '/help/submit-answer',
+        method: 'POST',
+        body: { questionId, answer },
+      }),
+    }),
+
+      // Add these endpoints in the 'endpoints' section of your appApi
+      getStats: builder.query({
+        query: () => '/stats',
+      }),
+
+      getLatestComponents: builder.query({
+        query: () => '/stats/latest-components',
+      }),
+
+      getLatestPurchases: builder.query({
+        query: () => '/stats/latest-orders',
+      }),
+
+      getMonthlyChange: builder.query({
+        query: () => '/stats/monthly-change',
+      }),
     // Additional endpoints can go here as your project evolves
   }),
 });
@@ -217,6 +264,15 @@ export const {
   useAddRequestMutation,
   useUpdateRequestMutation,
   useDeleteRequestMutation,
+  useGetStaticsMutation,
+  useGetCurrentUserQuery,
+  useLazySearchComponentsQuery,
+  useSubmitQuestionMutation, // Add the new hook for submitting questions
+  useSubmitAnswerMutation,
+  useGetStatsQuery,
+  useGetLatestComponentsQuery,
+  useGetLatestPurchasesQuery,
+  useGetMonthlyChangeQuery,
 } = appApi;
 
 export default appApi;

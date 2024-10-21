@@ -1,6 +1,6 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGetComponentsQuery, useDeleteComponentMutation, useUpdateComponentMutation } from '../services/api';
+import { useGetComponentsQuery, useDeleteComponentMutation, useUpdateComponentMutation, useLazySearchComponentsQuery } from '../services/api';
 import './ComponentList.css';
 import AddRequest from './AddRequest';
 import AddComponent from './AddComponent';
@@ -10,11 +10,14 @@ const ComponentList = () => {
     const [isAddRequestVisible, setAddRequestVisible] = useState(false);
     const [isAddComponentVisible, setAddComponentVisible] = useState(false);
     const [editingComponent, setEditingComponent] = useState(null);
+    const [searchTerm, setSearchTerm] = useState(''); // Search term state
+    const [searchResults, setSearchResults] = useState(null); // To store search results
 
     const navigate = useNavigate();
     const { data: components, refetch } = useGetComponentsQuery();
     const [deleteComponent] = useDeleteComponentMutation();
     const [updateComponent] = useUpdateComponentMutation();
+    const [triggerSearch] = useLazySearchComponentsQuery(); // Lazy query for search
 
     const toggleAddRequest = () => {
         setAddRequestVisible(!isAddRequestVisible);
@@ -42,10 +45,38 @@ const ComponentList = () => {
         toggleAddComponent(); // Show the add component modal to edit
     };
 
+    const handleSearch = async () => {
+        if (searchTerm.trim()) {
+            try {
+                const result = await triggerSearch({ partNo: searchTerm }).unwrap();
+                setSearchResults(result); // Set the search results to be displayed
+            } catch (err) {
+                console.error('Error searching components:', err);
+            }
+        } else {
+            setSearchResults(null); // Clear search results if input is empty
+        }
+    };
+
+    const displayedComponents = searchResults || components; // Show search results if present
+
     return (
         <div className="dashboard-container">
             <Header title="Components" titlePrefix="Search" />
             <div className={`component-list-container ${isAddRequestVisible || isAddComponentVisible ? 'blur-background blur-transition' : ''}`}>
+                {/* Search Input and Button */}
+                <div className="filter-search">
+                    <input
+                        type="text"
+                        placeholder="Search by part number"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="search-input"
+                    />
+                    <button onClick={handleSearch} className="search-btn">Search</button>
+                </div>
+
+                {/* Component List Table */}
                 <table className="component-table">
                     <thead>
                         <tr>
@@ -60,7 +91,7 @@ const ComponentList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {components?.map((component) => (
+                        {displayedComponents?.map((component) => (
                             <tr key={component._id}>
                                 <td>{component.stockID}</td>
                                 <td>{component.product}</td>
@@ -77,6 +108,8 @@ const ComponentList = () => {
                         ))}
                     </tbody>
                 </table>
+
+                {/* Action Buttons */}
                 <div className="action-buttons">
                     <button onClick={toggleAddRequest} className="btn-request">Request</button>
                     <button onClick={toggleAddComponent} className="btn-add">Add</button>
@@ -85,7 +118,7 @@ const ComponentList = () => {
             </div>
 
             {isAddRequestVisible && <AddRequest visible={isAddRequestVisible} onClose={() => setAddRequestVisible(false)} />}
-            
+
             {isAddComponentVisible && (
                 <AddComponent
                     visible={isAddComponentVisible}
@@ -98,8 +131,6 @@ const ComponentList = () => {
                         try {
                             if (editingComponent) {
                                 await updateComponent({ id: editingComponent._id, component }).unwrap();
-                            } else {
-                                // Add logic to handle adding new component if needed
                             }
                             refetch(); // Refresh the component list after update
                         } catch (err) {

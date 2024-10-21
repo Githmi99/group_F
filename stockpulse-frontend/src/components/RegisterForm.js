@@ -7,6 +7,10 @@ import { register } from '../services/authService';
 const RegisterForm = () => {
   const navigate = useNavigate();
 
+  const handleLoginClick = () => {
+    navigate('/');
+  };
+
   // State to manage form data
   const [formData, setFormData] = useState({
     firstName: '',
@@ -134,8 +138,9 @@ const RegisterForm = () => {
               Sign up
             </button>
           </form>
-          <p className='login-link'>
-            Already have an account? <a href='/login'>Log in</a>
+          <p className='login-link'><c>
+            Already have an account?         
+            <button className="login" onClick={handleLoginClick}>Login</button></c>
           </p>
         </div>
       </div>

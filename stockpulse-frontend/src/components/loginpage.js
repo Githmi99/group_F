@@ -93,11 +93,6 @@ const LoginPage = () => {
               </Button>
 
               <div className='divider'>Or</div>
-
-              <Button variant='light' className='google-signin-btn'>
-                <FaGoogle className='google-icon' /> Sign in with Google
-              </Button>
-
               <div className='signup-link'>
                 Don’t have an account?{' '}
                 <Button variant='link' onClick={() => navigate('/register')}>

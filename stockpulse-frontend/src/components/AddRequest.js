@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAddRequestMutation } from '../services/api'; // Adjust the path as needed
+import { useAddRequestMutation } from '../services/api'; 
 import './AddRequest.css';
 
 const AddRequest = ({ visible, onClose }) => {
@@ -25,8 +25,13 @@ const AddRequest = ({ visible, onClose }) => {
     e.preventDefault();
     setError(null);
   
+    const userId = localStorage.getItem('userId');  // Example to get userId
+  
     try {
-      await addRequest(formData).unwrap();
+      await addRequest({
+        ...formData,
+        userId // Add userId to the request
+      }).unwrap();
       onClose();  // Close modal after successful request
     } catch (err) {
       console.error('Error adding request:', err);

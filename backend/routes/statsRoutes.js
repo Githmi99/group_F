@@ -13,4 +13,8 @@ router.get('/stats/latest-components', statsController.getLatestComponents);
 // Define the route to get stats
 router.get('/stats/monthly-change', statsController.getMonthlyChange);
 
+// Define the route to get latest added orders
+router.get('/stats/latest-orders', statsController.getLatestPurchases);
+
+
 module.exports = router;

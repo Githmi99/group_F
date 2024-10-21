@@ -30,22 +30,22 @@ const NavigationPanel = () => {
       'lowstocks',
       'purchases',
       'bom-ordering',
+      'bomorderslist',
       'lending',
-      'analytics',
-      'settings',
-    ],
-    'stock manager': ['components', 'lowstocks', 'purchases', 'lending','componentRequest' ],
-    user: ['components', 'purchases', 'bom-ordering'],
-    intern: ['components', 'purchases'],
+      'help',
+          ],
+    'stock manager': ['dashboard','components', 'lowstocks', 'purchases', 'lending','componentRequest' , 'bomorderslist','help',],
+    user: ['dashboard','components', 'purchases', 'bom-ordering','help',],
+    intern: ['dashboard','components', 'purchases','help',],
     executive: [
       'dashboard',
       'components',
       'lowstocks',
       'purchases',
       'bom-ordering',
+      'bomorderslist',
       'lending',
-      'analytics',
-      'settings',
+      'help',
     ],
   };
 
@@ -107,6 +107,14 @@ const NavigationPanel = () => {
               </NavLink>
             </li>
           )}
+          {allowedRoutes.includes('bomorderslist') && (
+            <li>
+              <NavLink to='/bomorderslist' activeClassName='active'>
+                <FaClipboardList className='nav-icon' />
+                <span>BoM Ordering List</span>
+              </NavLink>
+            </li>
+          )}
           {allowedRoutes.includes('lending') && (
             <li>
               <NavLink to='/lending' activeClassName='active'>
@@ -115,26 +123,15 @@ const NavigationPanel = () => {
               </NavLink>
             </li>
           )}
-          {allowedRoutes.includes('analytics') && (
-            <li>
-              <NavLink to='/analytics' activeClassName='active'>
-                <FaChartLine className='nav-icon' />
-                <span>Analytics</span>
-              </NavLink>
-            </li>
-          )}
         </ul>
       </nav>
       <div className='settings-help'>
-        {allowedRoutes.includes('settings') && (
-          <NavLink to='/settings' activeClassName='active'>
+        {allowedRoutes.includes('help') && (
+          <NavLink to='/help' activeClassName='active'>
             <FaCog className='nav-icon' />
-            <span>Settings</span>
+            <span>Help Centre</span>
           </NavLink>
         )}
-        <NavLink to='/help' activeClassName='active'>
-          Help Centre
-        </NavLink>
       </div>
     </div>
   );

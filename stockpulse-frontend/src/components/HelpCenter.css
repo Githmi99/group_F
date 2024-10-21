@@ -14,3 +14,28 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
+form {
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #fcfffd;
+  color: rgb(8, 8, 8);
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b2b8b2;
+}
+
+p {
+  margin: 10px 0;
+}

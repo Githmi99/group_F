@@ -1,5 +1,4 @@
 // controllers/statsController.js
-
 const BoM = require('../models/BoM');
 const Component = require('../models/component');
 const Purchase = require('../models/Purchase');
@@ -33,12 +32,25 @@ exports.getLatestComponents = async (req, res) => {
     // Retrieve the latest 10 added components, sorted by their creation date in descending order
     const latestComponents = await Component.find()
       .sort({ _id: -1 }) // Sorting by _id in descending order returns the most recent entries
-      .limit(10);
+      .limit(5);
 
     res.status(200).json(latestComponents);
   } catch (error) {
     console.error('Error fetching latest components:', error);
     res.status(500).json({ message: 'Failed to fetch latest components' });
+  }
+};
+
+
+// Get latest 5 purchases
+exports. getLatestPurchases = async (req, res) => {
+  try {
+    const purchases = await Purchase.find()
+      .sort({ createdAt: -1 }) // Sort by createdAt field in descending order
+      .limit(5); // Limit to the latest 5 purchases
+    res.status(200).json(purchases);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching purchases' });
   }
 };
 

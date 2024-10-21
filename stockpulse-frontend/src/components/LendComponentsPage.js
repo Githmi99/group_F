@@ -62,16 +62,9 @@ const LendComponentsPage = () => {
         <div className="lend-components-page">
             <Header title="Components" titlePrefix="Lend" />
             <div className="content">
-                <div className="search-sort-bar">
-                    <input type="text" placeholder="Search here" className="search-input" />
-                    <FaSearch className="search-icon" />
-                    <button className="sort-button">Sort By</button>
-                </div>
-
                 <table className="components-table">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Stock ID</th>
                             <th>Borrower ID</th>
                             <th>Borrowed Date</th>
@@ -84,7 +77,6 @@ const LendComponentsPage = () => {
                     <tbody>
                         {lendings?.map((lending) => (
                             <tr key={lending._id}>
-                                <td><input type="checkbox" /></td>
                                 <td>{lending.stockID}</td>
                                 <td>{lending.borrowerID}</td>
                                 <td>{new Date(lending.borrowedDate).toLocaleDateString()}</td>
