@@ -8,9 +8,9 @@
   }
   
   .content {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
@@ -26,7 +26,7 @@ textarea {
 
 button {
   padding: 10px 15px;
-  background-color: #fcfffd;
+  background-color: #adb8b1;
   color: rgb(8, 8, 8);
   border: none;
   cursor: pointer;
@@ -38,4 +38,36 @@ button:hover {
 
 p {
   margin: 10px 0;
+}
+/* src/components/HelpCenter.css */
+
+
+.question-box {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.predefined-qa {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+}
+
+h4 {
+  margin-bottom: 5px;
+}
+
+.answers-container {
+  margin-top: 10px;
+}
+
+.answer-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
 }

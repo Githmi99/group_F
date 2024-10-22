@@ -1,9 +1,9 @@
 /* src/components/Dashboard.css */
 
 .dashboard {
-  margin-left: 50px; /* To account for the navigation panel */
+  margin-left: 50px; 
   padding: 20px;
-  width:100%;
+  width: auto;
 }
 
 .dashboard-header {

@@ -4,11 +4,6 @@
     margin-top: 75px; /* Adjust based on your navigation height */
   }
   
-  /* Layout.css 
-.layout {
-  display: flex;
-}
-*/
 .navigation-panel {
   width: 250px; /* Adjust width as needed */
   height: 100vh; /* Full height of the viewport */
@@ -16,7 +11,7 @@
 }
 
 .content {
-  margin-left: 300px; /* Same as the width of the navigation panel */
+  margin-left: 290px; /* Same as the width of the navigation panel */
   padding: 20px; /* Adjust padding as needed */
   height:overflow; /* Full height of the viewport */
   width: 1220px;

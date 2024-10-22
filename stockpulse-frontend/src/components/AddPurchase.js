@@ -1,98 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AddPurchase.css';
 import Header from './Header';
-import { useAddPurchaseMutation } from '../services/api';
+import { useAddPurchaseMutation, useUpdatePurchaseMutation } from '../services/api';
 import Cookies from 'js-cookie';
 import requestApprovalFromAdmin from '../services/emailService';
 
-const AddPurchase = ({ onClose }) => {
+const AddPurchase = ({ onClose, purchase, onSave }) => {
   const [product, setProduct] = useState('');
   const [quantity, setQuantity] = useState('');
   const [paymentLinkOrShop, setPaymentLinkOrShop] = useState('');
   const [cost, setCost] = useState('');
   const [date, setDate] = useState('');
-  const [addPurchase] = useAddPurchaseMutation();
+  const [status, setStatus] = useState('Unpaid');  // Default status is 'Unpaid'
   const [message, setMessage] = useState('');
 
-  const handleAddPurchase = async (e) => {
+  const [addPurchase] = useAddPurchaseMutation();
+  const [updatePurchase] = useUpdatePurchaseMutation();  // Add the update mutation
+
+  // Populate the fields when editing an existing purchase
+  useEffect(() => {
+    if (purchase) {
+      setProduct(purchase.product || '');
+      setQuantity(purchase.quantity || '');
+      setPaymentLinkOrShop(purchase.paymentLinkOrShop || '');
+      setCost(purchase.cost || '');
+      setDate(purchase.date ? new Date(purchase.date).toISOString().split('T')[0] : '');  // Format the date correctly
+      setStatus(purchase.status || 'Unpaid');  // Prepopulate status field if editing
+    }
+  }, [purchase]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newPurchase = {
+    const updatedPurchase = {
       product,
       quantity: parseInt(quantity, 10),
       paymentLinkOrShop,
       cost: parseFloat(cost),
       date: new Date(date),
-      status: 'Unpaid',
-      // orderID could be generated here if needed
+      status,  // Include the selected status
     };
 
     const role = Cookies.get('role');
 
     if (!role) {
       alert('Not allowed to make the purchase');
+      return;
     }
 
     setMessage(`
       User with role "${role}" is requesting approval for a purchase:
-
       - Product: ${product}
       - Quantity: ${quantity}
       - Cost: Rs ${cost}
       - Payment Link/Shop: ${paymentLinkOrShop}
       - Date Required: ${date}
+      - Status: ${status}
     `);
 
-    // Constraints based on role
-    if (role === 'intern') {
-      await requestApprovalFromAdmin(message);
-      alert(
-        'Interns are not allowed to make purchases.Requested the purchase from admin.'
-      );
-      return;
-    }
-
-    if (role === 'executive' && parseFloat(cost) > 10000) {
-      await requestApprovalFromAdmin(message);
-      alert(
-        'Executives cannot make purchases over 10,000. Please request an admin.Requested the purchase from admin.'
-      );
-      return;
-    }
-
-    if (role === 'stock manager' && parseFloat(cost) > 5000) {
-      await requestApprovalFromAdmin(message);
-      alert(
-        'Executives cannot make purchases over 5000. Please request an admin.Requested the purchase from admin.'
-      );
-      return;
-    }
-
-    if (role === 'user' && parseFloat(cost) > 5000) {
-      await requestApprovalFromAdmin(message);
-      alert(
-        'Users cannot make purchases over 5000. Please request an admin.Requested the purchase from admin.'
-      );
-      return;
-    }
-
     try {
-      await addPurchase(newPurchase).unwrap();
-      alert('Purchase added successfully!');
+      if (purchase) {
+        // Updating an existing purchase
+        await updatePurchase({ id: purchase._id, purchase: updatedPurchase }).unwrap();
+        alert('Purchase updated successfully!');
+      } else {
+        // Adding a new purchase
+        await addPurchase(updatedPurchase).unwrap();
+        alert('Purchase added successfully!');
+      }
+      onSave(updatedPurchase);  // Call onSave to either update or add the purchase
       onClose();
     } catch (error) {
-      console.error(
-        'Failed to add purchase:',
-        error.response ? error.response.data : error.message
-      );
-      alert('Failed to add purchase');
+      console.error('Failed to save purchase:', error.response ? error.response.data : error.message);
+      alert('Failed to save purchase');
     }
   };
 
   return (
     <div className='add-purchase-container'>
-      <Header title='Purchase' titlePrefix='Add' />
-      <form className='add-purchase-form' onSubmit={handleAddPurchase}>
+      <Header title='Purchase' titlePrefix={purchase ? 'Edit' : 'Add'} />
+      <form className='add-purchase-form' onSubmit={handleSubmit}>
         <div className='form-group'>
           <label>Product:</label>
           <input
@@ -138,9 +125,22 @@ const AddPurchase = ({ onClose }) => {
             required
           />
         </div>
+        <div className='form-group'>
+          <label>Status:</label>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            required
+          >
+            <option value="Unpaid">Unpaid</option>
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
         <div className='actions'>
           <button type='submit' className='add-btn'>
-            Add Purchase
+            {purchase ? 'Update Purchase' : 'Add Purchase'}
           </button>
           <button type='button' className='cancel-btn' onClick={onClose}>
             Cancel

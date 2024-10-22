@@ -5,127 +5,73 @@
   box-sizing: border-box;
 }
 
-.low-stocks {
-    padding: 20px;
-    flex: 1;
-    background-color: #f5f5f5;
-  }
-  
-  .low-stocks h2 {
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .search-filter {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .search-input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .search-button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    background-color: none;
-    color: rgb(29, 28, 28);
-    border-color: black;
-    border-radius: 5px;
-    cursor: pointer;
-    height: min-content;
-  }
-  
-  .search-button:hover {
-    background-color: #555;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  table th, table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  table th {
-    background-color: #e0e0e0;
-  }
-  
-  table td.process {
-    color: orange;
-  }
-  
-  table td.delivered {
-    color: green;
-  }
-  
-  table td.cancelled {
-    color: red;
-  }
-  
-  .edit-button, .delete-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .edit-button:hover, .delete-button:hover {
-    color: #555;
-  }
-  
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .purchase-button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .purchase-button:hover {
-    background-color: #555;
-  }
-  
-  .cancel-button {
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .cancel-button:hover {
-    background-color: darkred;
-  }
-  
-  /* LowStocks.css */
+/* Button styles for edit and delete */
+.edit-button,
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
+.edit-button:hover,
+.delete-button:hover {
+  color: #555;
+}
+
+/* Action buttons alignment */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Purchase button styles */
+.purchase-button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  height: fit-content;
+  margin-top: 10px;
+}
+
+.purchase-button:hover {
+  background-color: #555;
+}
+
+/* Cancel button for actions */
+.cancel-button {
+  padding: 5px 10px; /* Smaller padding for the cancel button */
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px; /* Smaller font size */
+}
+
+.cancel-button:hover {
+  background-color: darkred;
+}
+
+/* LowStocks section */
 .low-stocks {
   padding: 20px;
   background-color: #f5f5f5;
-  overflow: auto; /* Allow scrolling if content is too large */
+  overflow: hidden; /* Prevent layout break due to overflow */
+}
+
+/* Table container for horizontal scrolling */
+.low-stocks .table-container {
+  overflow-x: auto; /* Horizontal scroll for wide tables */
 }
 
 .low-stocks table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  table-layout: fixed; /* Fix table within container bounds */
 }
 
 .low-stocks table th,
@@ -133,8 +79,40 @@
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
+  word-wrap: break-word; /* Wrap text in table cells */
 }
 
 .low-stocks table th {
   background-color: #e0e0e0;
+}
+
+/* Ensure full width for input fields */
+.low-stocks input[type="text"],
+.low-stocks input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Save button styles */
+.save-button {
+  padding: 5px 10px; /* Smaller padding for the save button */
+  font-size: 12px; /* Smaller font size */
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px; /* Space between buttons */
+}
+
+.save-button:hover {
+  opacity: 0.8;
+  background-color: #46e810;
+}
+
+/* Edit mode button styles for larger buttons */
+.edit-mode .save-button,
+.edit-mode .cancel-button {
+  padding: 5px 10px;
+  font-size: 12px;
 }

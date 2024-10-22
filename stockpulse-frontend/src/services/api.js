@@ -170,12 +170,13 @@ export const appApi = createApi({
     }),
 
     updateRequest: builder.mutation({
-      query: ({ id, request }) => ({
-        url: `/component-request/:id/status`,
+      query: ({ id, status }) => ({
+        url: `/component-request/${id}/status`, // Use the actual ID in the URL
         method: 'PATCH',
-        body: request,
+        body: { status }, // Only send the updated status field
       }),
     }),
+    
 
     deleteRequest: builder.mutation({
       query: (id) => ({
