@@ -1,0 +1,427 @@
+<html><head><meta charset="utf-8"/><title>BoM Controller Test Report</title><style type="text/css">html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+body {
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+/** SUMMARY */
+#summary {
+  color: #333;
+  margin: 2rem 0;
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 2rem;
+  background: #eee;
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 2rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: #4f8a10;
+  border-left: 0.4rem solid #4f8a10;
+  padding-left: 0.5rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: #d8000c;
+  border-left: 0.4rem solid #d8000c;
+  padding-left: 0.5rem;
+}
+.summary-pending {
+  color: #9f6000;
+  border-left: 0.4rem solid #9f6000;
+  padding-left: 0.5rem;
+}
+.summary-empty {
+  color: #999;
+  border-left: 0.4rem solid #999;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: #dff2bf;
+  color: #4f8a10;
+}
+.test-result.failed {
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+.test-result.pending {
+  background-color: #ffdf61;
+  color: #9f6000;
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.75rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed #d8000c;
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 2rem;
+}
+.suite-container > input[type="checkbox"] {
+  position: absolute;
+  left: -100vw;
+}
+.suite-container label {
+  display: block;
+}
+.suite-container .suite-tests {
+  overflow-y: hidden;
+  height: 0;
+}
+.suite-container > input[type="checkbox"]:checked ~ .suite-tests {
+  height: auto;
+  overflow: visible;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: #eee;
+  color: #777;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.75rem;
+}
+.suite-info .suite-time.warn {
+  background-color: #d8000c;
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 0.5rem;
+  transform: rotate(0deg);
+}
+.suite-container > input[type="checkbox"]:checked ~ label .suite-info:before {
+  transform: rotate(180deg);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: #efefef;
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: #777;
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: #000;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: #000;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><div class="jesthtml-content"><header><h1 id="title">BoM Controller Test Report</h1></header><div id="metadata-container"><div id="timestamp">Started: 2024-10-22 20:32:02</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (5)</div><div class="summary-passed ">5 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (21)</div><div class="summary-passed ">21 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></div><div id="suite-1" class="suite-container"><input id="collapsible-0" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-0"><div class="suite-info"><div class="suite-path">D:\Group17\group_F\backend\tests\purchaseController.test.js</div><div class="suite-time">2.009s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Purchase Controller &gt; getPurchases</div><div class="test-title">should return all purchases</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Purchase Controller &gt; addPurchase</div><div class="test-title">should add a new purchase</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div></div></div><div id="suite-2" class="suite-container"><input id="collapsible-1" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-1"><div class="suite-info"><div class="suite-path">D:\Group17\group_F\backend\tests\statsController.test.js</div><div class="suite-time">2.6s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Stats Controller &gt; getStats</div><div class="test-title">should return aggregated stats</div><div class="test-status">passed</div><div class="test-duration">0.017s</div></div></div></div></div><div id="suite-3" class="suite-container"><input id="collapsible-2" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-2"><div class="suite-info"><div class="suite-path">D:\Group17\group_F\backend\tests\componentRequestController.test.js</div><div class="suite-time">2.61s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component Request Controller &gt; createRequest</div><div class="test-title">should create a new component request</div><div class="test-status">passed</div><div class="test-duration">0.021s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component Request Controller &gt; updateRequestStatus</div><div class="test-title">should update the status and stock if issued</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div></div></div><div id="suite-4" class="suite-container"><input id="collapsible-3" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-3"><div class="suite-info"><div class="suite-path">D:\Group17\group_F\backend\tests\bom.test.js</div><div class="suite-time">3.04s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">BoM API</div><div class="test-title">Create a new BoM</div><div class="test-status">passed</div><div class="test-duration">0.14s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BoM API</div><div class="test-title">Get all BoMs</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BoM API</div><div class="test-title">Get BoM by ID</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BoM API</div><div class="test-title">Update BoM by ID</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BoM API</div><div class="test-title">Delete BoM by ID</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BoM API</div><div class="test-title">Search in stock</div><div class="test-status">passed</div><div class="test-duration">0.025s</div></div></div></div><div class="suite-consolelog"><div class="suite-consolelog-header">Console Log</div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (D:\Group17\group_F\backend\controllers\bomController.js:16:13)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\Group17\group_F\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:328:13)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at cors (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:188:7)
+    at D:\Group17\group_F\backend\node_modules\cors\lib\index.js:224:17
+    at originCallback (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:214:15)
+    at D:\Group17\group_F\backend\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:328:13)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\Group17\group_F\backend\node_modules\body-parser\lib\read.js:137:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+    at invokeCallback (D:\Group17\group_F\backend\node_modules\raw-body\index.js:238:16)
+    at done (D:\Group17\group_F\backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (D:\Group17\group_F\backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:518:28)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)</pre><pre class="suite-consolelog-item-message">createBoM {
+  name: 'Test BoM',
+  description: 'A test BoM',
+  items: [
+    {
+      partNumber: '123ABC',
+      quantity: 10,
+      cost: 5,
+      footprint: 'SMD',
+      description: 'A test component',
+      _id: new ObjectId('6717be6dcdedb1afc82711e0')
+    }
+  ],
+  _id: new ObjectId('6717be6dcdedb1afc82711df')
+}</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at NativeConnection.log (D:\Group17\group_F\backend\config\db.js:14:11)
+    at Object.onceWrapper (node:events:632:28)
+    at NativeConnection.emit (node:events:518:28)
+    at NativeConnection.Object.&lt;anonymous&gt;.Connection.onOpen (D:\Group17\group_F\backend\node_modules\mongoose\lib\connection.js:769:8)
+    at _setClient (D:\Group17\group_F\backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:413:8)
+    at NativeConnection.createClient (D:\Group17\group_F\backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:316:3)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)</pre><pre class="suite-consolelog-item-message">Connected to the database</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (D:\Group17\group_F\backend\controllers\bomController.js:16:13)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\Group17\group_F\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:328:13)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at cors (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:188:7)
+    at D:\Group17\group_F\backend\node_modules\cors\lib\index.js:224:17
+    at originCallback (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:214:15)
+    at D:\Group17\group_F\backend\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:328:13)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\Group17\group_F\backend\node_modules\body-parser\lib\read.js:137:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+    at invokeCallback (D:\Group17\group_F\backend\node_modules\raw-body\index.js:238:16)
+    at done (D:\Group17\group_F\backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (D:\Group17\group_F\backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:518:28)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)</pre><pre class="suite-consolelog-item-message">createBoM {
+  name: 'Test BoM',
+  description: 'A test BoM',
+  items: [
+    {
+      partNumber: '123ABC',
+      quantity: 5,
+      cost: 5,
+      footprint: 'SMD',
+      description: 'A test component',
+      _id: new ObjectId('6717be6dcdedb1afc82711ed')
+    }
+  ],
+  _id: new ObjectId('6717be6dcdedb1afc82711ec')
+}</pre></div></div></div><div id="suite-5" class="suite-container"><input id="collapsible-4" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-4"><div class="suite-info"><div class="suite-path">D:\Group17\group_F\backend\tests\component.test.js</div><div class="suite-time">3.238s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; GET /api/components</div><div class="test-title">should return all components</div><div class="test-status">passed</div><div class="test-duration">0.057s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; GET /api/components</div><div class="test-title">should return 500 if there is a server error</div><div class="test-status">passed</div><div class="test-duration">0.055s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; POST /api/components</div><div class="test-title">should add a new component and return it</div><div class="test-status">passed</div><div class="test-duration">0.039s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; POST /api/components</div><div class="test-title">should return 400 if partNo is missing</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; PUT /api/components/:id</div><div class="test-title">should update a component by ID</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; PUT /api/components/:id</div><div class="test-title">should return 404 if the component is not found</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; DELETE /api/components/:id</div><div class="test-title">should delete a component by ID</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; DELETE /api/components/:id</div><div class="test-title">should return 404 if the component is not found</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; GET /api/components/search</div><div class="test-title">should return components by partNo</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Component API &gt; GET /api/components/search</div><div class="test-title">should return 400 if partNo is not provided</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div></div><div class="suite-consolelog"><div class="suite-consolelog-header">Console Log</div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at NativeConnection.log (D:\Group17\group_F\backend\config\db.js:14:11)
+    at Object.onceWrapper (node:events:632:28)
+    at NativeConnection.emit (node:events:518:28)
+    at NativeConnection.Object.&lt;anonymous&gt;.Connection.onOpen (D:\Group17\group_F\backend\node_modules\mongoose\lib\connection.js:769:8)
+    at _setClient (D:\Group17\group_F\backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:413:8)
+    at NativeConnection.createClient (D:\Group17\group_F\backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:316:3)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)</pre><pre class="suite-consolelog-item-message">Connected to the database</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at error (D:\Group17\group_F\backend\controllers\componentController.js:10:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)</pre><pre class="suite-consolelog-item-message">Error fetching components: Error: Database error
+    at Object.&lt;anonymous&gt; (D:\Group17\group_F\backend\tests\component.test.js:26:40)
+    at Promise.then.completed (D:\Group17\group_F\backend\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (D:\Group17\group_F\backend\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (D:\Group17\group_F\backend\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (D:\Group17\group_F\backend\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (D:\Group17\group_F\backend\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (D:\Group17\group_F\backend\node_modules\jest-circus\build\run.js:121:9)
+    at _runTestsForDescribeBlock (D:\Group17\group_F\backend\node_modules\jest-circus\build\run.js:121:9)
+    at run (D:\Group17\group_F\backend\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (D:\Group17\group_F\backend\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (D:\Group17\group_F\backend\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (D:\Group17\group_F\backend\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (D:\Group17\group_F\backend\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (D:\Group17\group_F\backend\node_modules\jest-runner\build\testWorker.js:106:12)</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at log (D:\Group17\group_F\backend\controllers\componentController.js:44:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)</pre><pre class="suite-consolelog-item-message">Component added: {
+  product: 'New Product',
+  partNo: 'NEW123',
+  value: '100uF',
+  qty: 20,
+  footprint: 'SMD',
+  description: 'New component description',
+  status: 'In Stock',
+  _id: 'mockId',
+  stockID: 'mockStockID'
+}</pre></div><div class="suite-consolelog-item"><pre class="suite-consolelog-item-origin">    at error (D:\Group17\group_F\backend\controllers\componentController.js:24:13)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\Group17\group_F\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:328:13)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at cors (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:188:7)
+    at D:\Group17\group_F\backend\node_modules\cors\lib\index.js:224:17
+    at originCallback (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:214:15)
+    at D:\Group17\group_F\backend\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\Group17\group_F\backend\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\Group17\group_F\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:328:13)
+    at D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\Group17\group_F\backend\node_modules\express\lib\router\index.js:280:10)
+    at D:\Group17\group_F\backend\node_modules\body-parser\lib\read.js:137:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+    at invokeCallback (D:\Group17\group_F\backend\node_modules\raw-body\index.js:238:16)
+    at done (D:\Group17\group_F\backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (D:\Group17\group_F\backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:518:28)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)</pre><pre class="suite-consolelog-item-message">Part number is required</pre></div></div></div></div></body></html>

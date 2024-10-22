@@ -29,7 +29,11 @@ app.use('/api', addComponentRequestRoutes); // Use a more descriptive route path
 app.use('/api', statsRoutes);
 app.use('/api', helpCenterRoutes);
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
