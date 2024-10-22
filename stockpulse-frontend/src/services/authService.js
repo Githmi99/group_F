@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { jwt_decode, jwtDecode } from 'jwt-decode';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'http://13.49.41.236/api';
 
 export const register = async (formData) => {
   try {
