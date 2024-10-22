@@ -78,29 +78,30 @@ const Purchases = () => {
             </div>
 
             {isAddPurchaseVisible && (
-                <AddPurchase
-                    visible={isAddPurchaseVisible}
-                    onClose={() => {
-                        setAddPurchaseVisible(false);
-                        setEditingPurchase(null);
-                    }}
-                    purchase={editingPurchase}
-                    onSave={async (purchase) => {
-                        try {
-                            if (editingPurchase) {
-                                await updatePurchase({ id: editingPurchase._id, purchase }).unwrap();
-                            } else {
-                                // Add logic to handle adding new purchase if needed
-                            }
-                            refetch(); // Refresh the purchase list after update
-                        } catch (err) {
-                            console.error('Error updating purchase:', err);
-                        }
-                    }}
-                />
-            )}
+        <div className="modal-overlay">
+            <AddPurchase
+            onClose={() => {
+                setAddPurchaseVisible(false);
+                setEditingPurchase(null);
+            }}
+            purchase={editingPurchase}
+            onSave={async (purchase) => {
+                try {
+                if (editingPurchase) {
+                    await updatePurchase({ id: editingPurchase._id, purchase }).unwrap();
+                } else {
+                    // Add logic to handle adding new purchase if needed
+                }
+                refetch(); // Refresh the purchase list after update
+                } catch (err) {
+                console.error('Error updating purchase:', err);
+                }
+            }}
+            />
         </div>
-    );
+        )}
+        </div>)
+
 };
 
 export default Purchases;
