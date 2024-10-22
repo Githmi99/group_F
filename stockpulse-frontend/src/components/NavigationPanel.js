@@ -8,6 +8,7 @@ import {
   FaClipboardList,
   FaHandHoldingUsd,
   FaChartLine,
+  FaQuestionCircle,
 } from 'react-icons/fa';
 import './NavigationPanel.css';
 import Cookie from 'js-cookie';
@@ -128,7 +129,7 @@ const NavigationPanel = () => {
       <div className='settings-help'>
         {allowedRoutes.includes('help') && (
           <NavLink to='/help' activeClassName='active'>
-            <FaCog className='nav-icon' />
+            <FaQuestionCircle className='nav-icon' />
             <span>Help Centre</span>
           </NavLink>
         )}

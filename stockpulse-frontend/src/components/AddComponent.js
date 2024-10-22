@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAddComponentMutation, useUpdateComponentMutation } from '../services/api';
+import { useAddComponentMutation, useUpdateComponentMutation, useGetComponentsQuery } from '../services/api'; // Import the query to get components
 import './AddComponent.css';
 
 const AddComponent = ({ visible, onClose, component, onSave }) => {
@@ -16,6 +16,7 @@ const AddComponent = ({ visible, onClose, component, onSave }) => {
     const [error, setError] = useState(null);
     const [addComponent] = useAddComponentMutation();
     const [updateComponent] = useUpdateComponentMutation();
+    const { data: components } = useGetComponentsQuery();  // Fetch all components
 
     useEffect(() => {
         if (component) {
@@ -56,11 +57,25 @@ const AddComponent = ({ visible, onClose, component, onSave }) => {
         setError(null);
 
         try {
-            if (component) {
-                await updateComponent({ id: component._id, component: formData }).unwrap();
+            // Check if a component with the same part number already exists
+            const existingComponent = components?.find((comp) => comp.partNo === formData.partNo);
+
+            if (existingComponent) {
+                // If the component exists, update its quantity
+                const updatedQty = parseInt(existingComponent.qty, 10) + parseInt(formData.qty, 10);
+                const updatedComponent = {
+                    ...existingComponent,
+                    qty: updatedQty,
+                };
+
+                await updateComponent({ id: existingComponent._id, component: updatedComponent }).unwrap();
+                alert('Component quantity updated successfully!');
             } else {
+                // If the component doesn't exist, add a new one
                 await addComponent(formData).unwrap();
+                alert('Component added successfully!');
             }
+
             onSave(); // Callback to refresh data and close modal
             onClose(); // Close modal on success
         } catch (err) {

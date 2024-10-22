@@ -32,10 +32,10 @@ const Purchases = () => {
     };
 
     const handleEdit = (purchase) => {
-        setEditingPurchase(purchase);
-        toggleAddPurchase(); // Show the add purchase modal to edit
+        setEditingPurchase(purchase);  // Set the selected purchase data
+        toggleAddPurchase();  // Show the add purchase modal to edit
     };
-
+    
     return (
         <div className="dashboard-container">
             <Header title="Purchases" titlePrefix="Search" />
@@ -78,29 +78,31 @@ const Purchases = () => {
             </div>
 
             {isAddPurchaseVisible && (
-        <div className="modal-overlay">
-            <AddPurchase
-            onClose={() => {
-                setAddPurchaseVisible(false);
-                setEditingPurchase(null);
-            }}
-            purchase={editingPurchase}
-            onSave={async (purchase) => {
-                try {
-                if (editingPurchase) {
-                    await updatePurchase({ id: editingPurchase._id, purchase }).unwrap();
-                } else {
-                    // Add logic to handle adding new purchase if needed
-                }
-                refetch(); // Refresh the purchase list after update
-                } catch (err) {
-                console.error('Error updating purchase:', err);
-                }
-            }}
-            />
-        </div>
+            <div className="modal-overlay">
+                <AddPurchase
+                    visible={isAddPurchaseVisible}
+                    onClose={() => {
+                        setAddPurchaseVisible(false);
+                        setEditingPurchase(null);
+                    }}
+                    purchase={editingPurchase}  // Pass the selected purchase for editing
+                    onSave={async (purchase) => {
+                        try {
+                            if (editingPurchase) {
+                                await updatePurchase({ id: editingPurchase._id, purchase }).unwrap();
+                            } else {
+                                // Logic to handle adding a new purchase
+                            }
+                            refetch();  // Refresh the purchase list after update
+                        } catch (err) {
+                            console.error('Error updating purchase:', err);
+                        }
+                    }}
+                />
+            </div>
         )}
-        </div>)
+    </div>
+)
 
 };
 

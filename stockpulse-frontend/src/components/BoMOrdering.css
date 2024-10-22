@@ -84,6 +84,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  height: fit-content;
+  margin-top: 10px;
 }
 
 .bom-ordering-container .bom-ordering-content .add-bom-btn {

@@ -3,6 +3,7 @@
 import React from 'react';
 import { useGetBOMsQuery } from '../services/api'; // Adjust the import path as necessary
 import Header from './Header';
+import './BoMOrdersPage.css';
 
 const BoMOrdersPage = () => {
   const { data: boms, isLoading, error } = useGetBOMsQuery(); // Fetch BoMs
