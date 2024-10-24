@@ -12,6 +12,7 @@ const AddPurchase = ({ onClose }) => {
   const [cost, setCost] = useState('');
   const [date, setDate] = useState('');
   const [addPurchase] = useAddPurchaseMutation();
+  const [message, setMessage] = useState('');
 
   const handleAddPurchase = async (e) => {
     e.preventDefault();
@@ -27,35 +28,35 @@ const AddPurchase = ({ onClose }) => {
     };
 
     const role = Cookies.get('role');
-
-    if (!role) {
-      alert('Not allowed to make the purchase');
-    }
-
-    // Constraints based on role
-    if (role === 'intern') {
-      alert('Interns are not allowed to make purchases.');
-      return;
-    }
-
-    if (role === 'executive' && parseFloat(cost) > 10000) {
-      alert(
-        'Executives cannot make purchases over 10,000. Please request an admin.'
-      );
-      return;
-    }
-
-    if (role === 'stock manager' && parseFloat(cost) > 5000) {
-      alert(
-        'Executives cannot make purchases over 5000. Please request an admin.'
-      );
-      return;
-    }
-
-    if (role === 'user' && parseFloat(cost) > 5000) {
-      alert('Users cannot make purchases over 5000. Please request an admin.');
-      return;
-    }
+// Constraints based on role
+ if (role === 'intern') {
+  await requestApprovalFromAdmin(message);
+  alert(
+    'Interns are not allowed to make purchases.Requested the purchase from admin.'
+  );
+  return;
+}
+if (role === 'executive' && parseFloat(cost) > 10000) {
+  await requestApprovalFromAdmin(message);
+  alert(
+    'Executives cannot make purchases over 10,000. Please request an admin.Requested the purchase from admin.'
+  );
+  return;
+}
+if (role === 'stock manager' && parseFloat(cost) > 5000) {
+  await requestApprovalFromAdmin(message);
+  alert(
+    'Executives cannot make purchases over 5000. Please request an admin.Requested the purchase from admin.'
+  );
+  return;
+}
+if (role === 'user' && parseFloat(cost) > 5000) {
+  await requestApprovalFromAdmin(message);
+  alert(
+    'Users cannot make purchases over 5000. Please request an admin.Requested the purchase from admin.'
+  );
+  return;
+}
 
     try {
       await addPurchase(newPurchase).unwrap();
