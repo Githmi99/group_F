@@ -3,6 +3,7 @@ import './AddPurchase.css';
 import Header from './Header';
 import { useAddPurchaseMutation } from '../services/api';
 import Cookies from 'js-cookie';
+import requestApprovalFromAdmin from '../services/emailService';
 
 const AddPurchase = ({ onClose }) => {
   const [product, setProduct] = useState('');
